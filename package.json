@@ -1,0 +1,94 @@
+{
+  "name": "quickselector",
+  "displayName": "Quick Selector",
+  "description": "Agiliza tu flujo de desarrollo al instante. Esta extensión para Visual Studio Code te permite generar selectores CSS de manera rápida y eficiente a partir de estructuras HTML. Simplifica la creación de estilos para tus proyectos con QuickSelector, tu compañero ideal para una codificación más ágil y precisa.",
+  "version": "0.0.1",
+  "publisher": "nicodev",
+  "author": {
+    "name": "Nicolas Carobene",
+    "email": "nicodev@me.com",
+    "url": "https://github.com/nicodev"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nicodev/quickselector.git"
+  },
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "keywords": [
+    "html",
+    "css",
+    "productivity"
+  ],
+  "categories": [
+    "Formatters",
+    "Other"
+  ],
+  "icon": "images/icon.png",
+  "galleryBanner": {
+    "color": "#423B55",
+    "theme": "dark"
+  },
+  "activationEvents": [
+    "onCommand:quickSelector.generateCSS"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "quickselector.generateCSS",
+        "title": "Generate CSS"
+      }
+    ],
+    "keybindings": {
+      "command": "quickSelector.generateCSS",
+      "key": "alt+x",
+      "mac": "alt+x",
+      "when": "editorHasSelectionAndFocus"
+    },
+    "configuration": {
+      "title": "Quick Selector",
+      "type": "object",
+      "properties": {
+        "quickselector.append": {
+          "type": "string",
+          "default": " {\n}\n",
+          "description": "Character(s) to be added after the classes CSS (including blank spaces)"
+        },
+        "quickselector.disableNotification": {
+          "type": "boolean",
+          "default": false,
+          "description": "Disable notification"
+        },
+        "quickselector.ignore": {
+          "type": "array",
+          "default": [
+            "container",
+            "row"
+          ],
+          "description": "Lists of classes CSS to ignore"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "pnpm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "pnpm run compile && pnpm run lint",
+    "lint": "eslint src --ext ts",
+    "test": "vscode-test"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.85.0",
+    "@types/mocha": "^10.0.6",
+    "@types/node": "18.x",
+    "@typescript-eslint/eslint-plugin": "^6.15.0",
+    "@typescript-eslint/parser": "^6.15.0",
+    "eslint": "^8.56.0",
+    "typescript": "^5.3.3",
+    "@vscode/test-cli": "^0.0.4",
+    "@vscode/test-electron": "^2.3.8"
+  }
+}
