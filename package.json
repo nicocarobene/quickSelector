@@ -31,22 +31,29 @@
     "theme": "dark"
   },
   "activationEvents": [
-    "onCommand:quickSelector.generateCSS"
+    "onCommand: quickSelector.generate"
   ],
   "main": "./out/extension.js",
   "contributes": {
     "commands": [
       {
-        "command": "quickselector.generateCSS",
+        "command": "quickSelector.generate",
         "title": "Generate CSS"
       }
     ],
-    "keybindings": {
-      "command": "quickSelector.generateCSS",
-      "key": "alt+x",
-      "mac": "alt+x",
-      "when": "editorHasSelectionAndFocus"
-    },
+    "keybindings": [
+      {
+        "command": "quickSelector.generate",
+        "key": "alt+x",
+        "mac": "alt+x",
+        "when": "editorHasSelectionAndFocus"
+      },
+      {
+        "key": "ctrl+f5",
+        "command": "workbench.action.reloadWindow",
+        "when": "editorTextFocus"
+      }
+    ],
     "configuration": {
       "title": "Quick Selector",
       "type": "object",
