@@ -9,8 +9,10 @@ function generateCSS() {
 			allSelectedText += selectedText;
 		});
 		if (allSelectedText) {
-			let regex = /class="(.+?)"|class='(.+?)'/gi;
-			let matches = [...allSelectedText.matchAll(regex)];
+			const regexClass = /class="(.+?)"|class='(.+?)'/gi;
+			const regexID = /id="(.+?)"|id='(.+?)'/gi;
+			const regexdata = /data-+\w+="(.+?)"|id='(.+?)'/gi;
+			const matches = [...allSelectedText.matchAll(regexClass), ...allSelectedText.matchAll(regexID), ...allSelectedText.matchAll(regexdata)];
 			if (matches) {
 				const classes = matches.map((match) => match[1] || match[2]);
 				const newClass: {
@@ -21,7 +23,6 @@ function generateCSS() {
 					.map(className => `${className}{\n  \n}`)
 					.join('\n \n'));
 				vscode.window.showInformationMessage('CSS classes copied to clipboard.');
-
 			}
 		}
 	}
