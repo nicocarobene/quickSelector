@@ -39,6 +39,10 @@
       {
         "command": "quickSelector.generate",
         "title": "Generate CSS"
+      },
+      {
+        "command": "quickSelector.previewCSS",
+        "title": "Show Selector CSS"
       }
     ],
     "keybindings": [

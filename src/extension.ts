@@ -1,6 +1,5 @@
 
 import * as vscode from 'vscode';
-
 function generateCSS() {
 	if (vscode.window.activeTextEditor) {
 		let allSelectedText = '';
@@ -9,24 +8,43 @@ function generateCSS() {
 			allSelectedText += selectedText;
 		});
 		if (allSelectedText) {
-			const regexClass = /class="(.+?)"|class='(.+?)'/gi;
-			const regexID = /id="(.+?)"|id='(.+?)'/gi;
-			const regexdata = /data-+\w+="(.+?)"|id='(.+?)'/gi;
-			const matches = [...allSelectedText.matchAll(regexClass), ...allSelectedText.matchAll(regexID), ...allSelectedText.matchAll(regexdata)];
-			if (matches) {
-				const classes = matches.map((match) => match[1] || match[2]);
-				const newClass: {
-					[key: string]: {}
-				} = {};
-				classes.forEach(str => newClass[`.${str}`] = {});
-				vscode.env.clipboard.writeText(Object.keys(newClass)
-					.map(className => `${className}{\n  \n}`)
-					.join('\n \n'));
-				vscode.window.showInformationMessage('CSS classes copied to clipboard.');
+			const [classes, dataS, idS] = matchesSelector(allSelectedText);
+			if (classes) {
+				const classSelector = classes.map((match) => match[1] || match[2]);
+				const idSelector = idS.map((match) => match[1] || match[2]);
+				const dataSelector = dataS.map((match) => match[0].split("="));
+				writeClassCSS({ classSelector, idSelector, dataSelector });
 			}
 		}
 	}
 }
+function writeClassCSS({ classSelector, idSelector, dataSelector }: { classSelector: string[], idSelector: string[], dataSelector: string[][] }) {
+	const newClass: { [key: `.${string}` | `#${string}` | `[${string}]`]: {} } = {};
+	idSelector.forEach(str => newClass[`#${str}`] = {});
+	dataSelector.forEach(str => newClass[`[${str[0]}=${str[1]}]`] = {});
+	classSelector.forEach(str => newClass[`.${str}`] = {});
+	vscode.env.clipboard.writeText(Object.keys(newClass)
+		.map(className => `${className}{\n  \n}`)
+		.join('\n \n'));
+	vscode.window.showInformationMessage('CSS classes copied to clipboard.', previewCSS(newClass));
+}
+
+function matchesSelector(allSelectedText: string): RegExpMatchArray[][] {
+	const regexClass = /class="(.+?)"|class='(.+?)'/gi;
+	const regexID = /id="(.+?)"|id='(.+?)'/gi;
+	const regexdata = /data-\w+="(.+?)"|data-\w+='(.+?)'/gi;
+	const matches = [...allSelectedText.matchAll(regexClass)];
+	const dataS = [...allSelectedText.matchAll(regexdata)];
+	const idS = [...allSelectedText.matchAll(regexID)];
+	return [matches, dataS, idS];
+}
+function previewCSS(cssObject: { [key: string]: {} }): string {
+	const previewText = Object.keys(cssObject)
+		.map(className => `${className}\n`)
+		.join('\n');
+	return 'Preview of CSS Styles:\n\n' + previewText;
+}
+
 export function activate(context: vscode.ExtensionContext) {
 	context.subscriptions.push(vscode.commands.registerCommand('quickSelector.generate', generateCSS));
 	console.log('Congratulations, your extension "quickSelector" is now active and ready!');
