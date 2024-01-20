@@ -10,7 +10,10 @@ function generateCSS() {
 		if (allSelectedText) {
 			const [classes, dataS, idS] = matchesSelector(allSelectedText);
 			if (classes) {
-				const classSelector = classes.map((match) => match[1] || match[2]);
+				const classSelector = classes.map((match) => {
+					const result = match[1] || match[2];
+					return result.split(' ');
+				});
 				const idSelector = idS.map((match) => match[1] || match[2]);
 				const dataSelector = dataS.map((match) => match[0].split("="));
 				writeClassCSS({ classSelector, idSelector, dataSelector });
@@ -18,11 +21,11 @@ function generateCSS() {
 		}
 	}
 }
-function writeClassCSS({ classSelector, idSelector, dataSelector }: { classSelector: string[], idSelector: string[], dataSelector: string[][] }) {
+function writeClassCSS({ classSelector, idSelector, dataSelector }: { classSelector: string[] | string[][], idSelector: string[], dataSelector: string[][] }) {
 	const newClass: { [key: `.${string}` | `#${string}` | `[${string}]`]: {} } = {};
 	idSelector.forEach(str => newClass[`#${str}`] = {});
 	dataSelector.forEach(str => newClass[`[${str[0]}=${str[1]}]`] = {});
-	classSelector.forEach(str => newClass[`.${str}`] = {});
+	classSelector.forEach(str => newClass[`.${Array.isArray(str) ? str.join(' .') : str}`] = {});
 	vscode.env.clipboard.writeText(Object.keys(newClass)
 		.map(className => `${className}{\n  \n}`)
 		.join('\n \n'));

@@ -50,7 +50,7 @@
         "command": "quickSelector.generate",
         "key": "alt+x",
         "mac": "alt+x",
-        "when": "editorHasSelectionAndFocus"
+        "when": "editorHasSelection"
       },
       {
         "key": "ctrl+f5",
