@@ -1,6 +1,6 @@
 
 import * as vscode from 'vscode';
-function generateCSS() {
+export function generateCSS() {
 	if (vscode.window.activeTextEditor) {
 		let allSelectedText = '';
 		vscode.window.activeTextEditor.selections.forEach((element) => {
@@ -21,7 +21,7 @@ function generateCSS() {
 		}
 	}
 }
-function writeClassCSS({ classSelector, idSelector, dataSelector }: { classSelector: string[] | string[][], idSelector: string[], dataSelector: string[][] }) {
+export function writeClassCSS({ classSelector, idSelector, dataSelector }: { classSelector: string[] | string[][], idSelector: string[], dataSelector: string[][] }) {
 	const newClass: { [key: `.${string}` | `#${string}` | `[${string}]`]: {} } = {};
 	idSelector.forEach(str => newClass[`#${str}`] = {});
 	dataSelector.forEach(str => newClass[`[${str[0]}=${str[1]}]`] = {});
@@ -32,7 +32,7 @@ function writeClassCSS({ classSelector, idSelector, dataSelector }: { classSelec
 	vscode.window.showInformationMessage('CSS classes copied to clipboard.', previewCSS(newClass));
 }
 
-function matchesSelector(allSelectedText: string): RegExpMatchArray[][] {
+export function matchesSelector(allSelectedText: string): RegExpMatchArray[][] {
 	const regexClass = /class="(.+?)"|class='(.+?)'/gi;
 	const regexID = /id="(.+?)"|id='(.+?)'/gi;
 	const regexdata = /data-\w+="(.+?)"|data-\w+='(.+?)'/gi;
@@ -41,7 +41,7 @@ function matchesSelector(allSelectedText: string): RegExpMatchArray[][] {
 	const idS = [...allSelectedText.matchAll(regexID)];
 	return [matches, dataS, idS];
 }
-function previewCSS(cssObject: { [key: string]: {} }): string {
+export function previewCSS(cssObject: { [key: string]: {} }): string {
 	const previewText = Object.keys(cssObject)
 		.map(className => `${className}\n`)
 		.join('\n');

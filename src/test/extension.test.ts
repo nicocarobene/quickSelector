@@ -1,15 +1,19 @@
 import * as assert from 'assert';
-
-// You can import and use all API from the 'vscode' module
-// as well as import your extension to test it
 import * as vscode from 'vscode';
-// import * as myExtension from '../../extension';
+import * as myExtension from '../extension';
 
-suite('Extension Test Suite', () => {
-	vscode.window.showInformationMessage('Start all tests.');
-
-	test('Sample test', () => {
-		assert.strictEqual(-1, [1, 2, 3].indexOf(5));
-		assert.strictEqual(-1, [1, 2, 3].indexOf(0));
+suite('QuickSelector Extension Test Suit', () => {
+	vscode.window.showInformationMessage('Start QuickSelector tests.');
+	test('Generate CSS', async () => {
+		const testText = '<div class="test-class"></div>';
+		const testUri = vscode.Uri.parse('untitled:test.html');
+		const testDocument = await vscode.workspace.openTextDocument(testUri);
+		await vscode.window.showTextDocument(testDocument);
+		await vscode.window.activeTextEditor?.edit(builder => builder.insert(new vscode.Position(0, 0), testText));
+		await vscode.commands.executeCommand('editor.action.selectAll');
+		await vscode.commands.executeCommand('editor.action.clipboardCopyAction');
+		await myExtension.generateCSS();
+		const clipboardContent = await vscode.env.clipboard.readText();
+		assert.strictEqual(clipboardContent, '.test-class{\n  \n}');
 	});
 });

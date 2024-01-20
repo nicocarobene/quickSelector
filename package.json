@@ -1,17 +1,16 @@
 {
   "name": "quickselector",
   "displayName": "Quick Selector",
-  "description": "Agiliza tu flujo de desarrollo al instante. Esta extensión para Visual Studio Code te permite generar selectores CSS de manera rápida y eficiente a partir de estructuras HTML. Simplifica la creación de estilos para tus proyectos con QuickSelector, tu compañero ideal para una codificación más ágil y precisa.",
+  "description": "Streamline your development workflow instantly with QuickSelector, a Visual Studio Code extension designed to swiftly and efficiently generate CSS selectors from HTML structures. Simplify the styling process for your projects with QuickSelector, your ideal companion for more agile and precise coding.",
   "version": "0.0.1",
   "publisher": "nicodev",
   "author": {
     "name": "Nicolas Carobene",
-    "email": "nicodev@me.com",
-    "url": "https://github.com/nicodev"
+    "url": "https://github.com/nicocarobene"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/nicodev/quickselector.git"
+    "url": "https://github.com/nicocarobene/quickSelector"
   },
   "engines": {
     "vscode": "^1.85.0"
@@ -27,7 +26,7 @@
   ],
   "icon": "images/icon.png",
   "galleryBanner": {
-    "color": "#423B55",
+    "color": "#0d1117",
     "theme": "dark"
   },
   "activationEvents": [
@@ -39,10 +38,6 @@
       {
         "command": "quickSelector.generate",
         "title": "Generate CSS"
-      },
-      {
-        "command": "quickSelector.previewCSS",
-        "title": "Show Selector CSS"
       }
     ],
     "keybindings": [
@@ -64,7 +59,7 @@
       "properties": {
         "quickselector.append": {
           "type": "string",
-          "default": " {\n}\n",
+          "default": " {\n \n}\n",
           "description": "Character(s) to be added after the classes CSS (including blank spaces)"
         },
         "quickselector.disableNotification": {
