@@ -11,8 +11,7 @@ Efficient Styling: Simplify the creation of styles for your projects with ease.
 Clipboard Integration: Copy generated CSS classes to the clipboard for seamless use in your stylesheets.
 
 For example if there is an image subfolder under your extension project workspace:
-
-[![Watch the video]([https://i.stack.imgur.com/Vp2cE.png](https://raw.githubusercontent.com/nicocarobene/quickSelector/main/images/Portada.webp)](https://github.com/nicocarobene/quickSelector/blob/main/images/demostration.webm)
+[demostration.webm](https://github.com/nicocarobene/quickSelector/assets/122571870/76d01303-4a90-436b-b6c5-e63fc24e703a)
 
 > Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
 
