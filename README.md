@@ -12,14 +12,14 @@ Clipboard Integration: Copy generated CSS classes to the clipboard for seamless 
 
 For example if there is an image subfolder under your extension project workspace:
 
-\!\[feature X\]\(images/feature-x.png\)
+\!\[demotration Quick Selector\]\(images/demostration.webm\)
 
 > Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
 
 ## How to Use
 
-1-Select the desired HTML structure in your editor.
-2-Run the "QuickSelector: Generate CSS" command.
+1-Select the desired HTML structure in your editor and copy code in your clipboard.
+2-Run the "QuickSelector: Generate CSS" command with Ctrl + Alt + P.
 3-The generated CSS selectors will be copied to your clipboard.
 4-Paste the selectors into your CSS file and enhance your styling process.
 

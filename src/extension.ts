@@ -1,5 +1,6 @@
 
 import * as vscode from 'vscode';
+
 export function generateCSS() {
 	if (vscode.window.activeTextEditor) {
 		let allSelectedText = '';

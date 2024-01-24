@@ -1,9 +1,9 @@
 {
   "name": "quickselector",
   "displayName": "Quick Selector",
-  "description": "Streamline your development workflow instantly with QuickSelector, a Visual Studio Code extension designed to swiftly and efficiently generate CSS selectors from HTML structures. Simplify the styling process for your projects with QuickSelector, your ideal companion for more agile and precise coding.",
+  "description": "Create your selectors quickly and efficiently from your HTML structure.",
   "version": "0.0.1",
-  "publisher": "nicodev",
+  "publisher": "NicolasCarobene",
   "author": {
     "name": "Nicolas Carobene",
     "url": "https://github.com/nicocarobene"
@@ -24,7 +24,7 @@
     "Formatters",
     "Other"
   ],
-  "icon": "images/icon.png",
+  "icon": "images/Portada.webp",
   "galleryBanner": {
     "color": "#0d1117",
     "theme": "dark"
@@ -79,10 +79,10 @@
     }
   },
   "scripts": {
-    "vscode:prepublish": "pnpm run compile",
+    "vscode:prepublish": "npm run compile",
     "compile": "tsc -p ./",
     "watch": "tsc -watch -p ./",
-    "pretest": "pnpm run compile && pnpm run lint",
+    "pretest": "npm run compile && npm run lint",
     "lint": "eslint src --ext ts",
     "test": "vscode-test"
   },
