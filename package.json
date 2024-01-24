@@ -2,7 +2,7 @@
   "name": "quickselector",
   "displayName": "Quick Selector",
   "description": "Create your selectors quickly and efficiently from your HTML structure.",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "publisher": "NicolasCarobene",
   "author": {
     "name": "Nicolas Carobene",
